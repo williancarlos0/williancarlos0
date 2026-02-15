@@ -586,10 +586,6 @@
 
         <div class="config-section">
             <h2>⚙️ Configurações</h2>
-            <div class="warning-message">
-                <strong>⚠️ IMPORTANTE:</strong> Antes de usar, você precisa configurar o Firebase!<br>
-                Veja as instruções no arquivo README.md
-            </div>
             
             <div style="margin-top: 30px;">
                 <h3 style="color: var(--primary); margin-bottom: 15px;">📱 Seu WhatsApp</h3>
@@ -644,33 +640,36 @@
 
     <!-- Firebase SDK -->
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getDatabase, ref, onValue, set, remove } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js';
+        import { getDatabase, ref, onValue, set, remove } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js';
 
         // ============================================
-        // CONFIGURE SEU FIREBASE AQUI!
+        // FIREBASE CONFIGURADO!
         // ============================================
         const firebaseConfig = {
-            apiKey: "SUA_API_KEY_AQUI",
-            authDomain: "seu-projeto.firebaseapp.com",
-            databaseURL: "https://seu-projeto-default-rtdb.firebaseio.com",
-            projectId: "seu-projeto",
-            storageBucket: "seu-projeto.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef"
+            apiKey: "AIzaSyB8N-iXIUCKGsuIWgC4lkTHgaOoOOUPBaM",
+            authDomain: "cha-casa-aguas-lindas.firebaseapp.com",
+            databaseURL: "https://cha-casa-aguas-lindas-default-rtdb.firebaseio.com",
+            projectId: "cha-casa-aguas-lindas",
+            storageBucket: "cha-casa-aguas-lindas.firebasestorage.app",
+            messagingSenderId: "725562096897",
+            appId: "1:725562096897:web:deec9e783bedc1e00faf00",
+            measurementId: "G-CFF93S4LDP"
         };
 
         // Inicializar Firebase
-        let app, database;
+        let app, database, analytics;
         try {
             app = initializeApp(firebaseConfig);
             database = getDatabase(app);
+            analytics = getAnalytics(app);
         } catch (error) {
             console.error("Erro ao inicializar Firebase:", error);
             document.getElementById('loadingMessage').innerHTML = `
                 <div class="warning-message">
-                    ⚠️ Firebase não configurado!<br>
-                    Por favor, configure as credenciais do Firebase no código.
+                    ⚠️ Erro ao conectar com Firebase!<br>
+                    ${error.message}
                 </div>
             `;
         }
@@ -682,21 +681,22 @@
             { id: 3, icon: '🍽️', name: 'Aparelho de Jantar', description: 'Jogo completo para 6 pessoas' },
             { id: 4, icon: '☕', name: 'Jogo de Xícaras', description: 'Xícaras de porcelana elegantes' },
             { id: 5, icon: '🥤', name: 'Jogo de Copos', description: 'Conjunto de copos variados' },
-            { id: 6, icon: '🧺', name: 'Cesto de Roupas', description: 'Organizador prático' },
-            { id: 7, icon: '🛁', name: 'Jogo de Toalhas', description: 'Toalhas de banho macias' },
-            { id: 8, icon: '🛏️', name: 'Jogo de Cama', description: 'Lençóis de alta qualidade' },
-            { id: 9, icon: '🧹', name: 'Aspirador de Pó', description: 'Limpeza prática e eficiente' },
-            { id: 10, icon: '☕', name: 'Cafeteira Elétrica', description: 'Para um café perfeito' },
-            { id: 11, icon: '🌡️', name: 'Ferro de Passar', description: 'Com controle de temperatura' },
-            { id: 12, icon: '🍞', name: 'Torradeira', description: 'Para torradas crocantes' },
-            { id: 13, icon: '🥘', name: 'Forma de Bolo', description: 'Para bolos deliciosos' },
-            { id: 14, icon: '🍴', name: 'Talheres', description: 'Conjunto completo de talheres' },
-            { id: 15, icon: '🧴', name: 'Organizador de Pia', description: 'Para detergentes e esponjas' },
-            { id: 16, icon: '🖼️', name: 'Quadro Decorativo', description: 'Para embelezar a sala' },
-            { id: 17, icon: '🕯️', name: 'Velas Aromáticas', description: 'Para perfumar o ambiente' },
-            { id: 18, icon: '🪴', name: 'Vasos de Plantas', description: 'Para decoração verde' },
-            { id: 19, icon: '🧊', name: 'Forma de Gelo', description: 'Gelo em formatos divertidos' },
-            { id: 20, icon: '🥄', name: 'Kit de Utensílios', description: 'Colheres, espátulas e mais' }
+            { id: 6, icon: '🍴', name: 'Jogo de Talheres', description: 'Conjunto completo de talheres' },
+            { id: 7, icon: '🧺', name: 'Cesto de Roupas', description: 'Organizador prático' },
+            { id: 8, icon: '👔', name: 'Varal de Roupa de Chão', description: 'Varal prático e resistente' },
+            { id: 9, icon: '🛁', name: 'Jogo de Toalhas', description: 'Toalhas de banho macias' },
+            { id: 10, icon: '🛏️', name: 'Jogo de Cama', description: 'Lençóis de alta qualidade' },
+            { id: 11, icon: '🧹', name: 'Aspirador de Pó', description: 'Limpeza prática e eficiente' },
+            { id: 12, icon: '☕', name: 'Cafeteira Elétrica', description: 'Para um café perfeito' },
+            { id: 13, icon: '🌡️', name: 'Ferro de Passar', description: 'Com controle de temperatura' },
+            { id: 14, icon: '🍞', name: 'Torradeira', description: 'Para torradas crocantes' },
+            { id: 15, icon: '🥘', name: 'Forma de Bolo', description: 'Para bolos deliciosos' },
+            { id: 16, icon: '🧴', name: 'Organizador de Pia', description: 'Para detergentes e esponjas' },
+            { id: 17, icon: '🖼️', name: 'Quadro Decorativo', description: 'Para embelezar a sala' },
+            { id: 18, icon: '🕯️', name: 'Velas Aromáticas', description: 'Para perfumar o ambiente' },
+            { id: 19, icon: '🪴', name: 'Vasos de Plantas', description: 'Para decoração verde' },
+            { id: 20, icon: '🧊', name: 'Forma de Gelo', description: 'Gelo em formatos divertidos' },
+            { id: 21, icon: '🥄', name: 'Kit de Utensílios', description: 'Colheres, espátulas e mais' }
         ];
 
         let selectedGift = null;
