@@ -133,118 +133,6 @@
             line-height: 1.6;
         }
 
-        .config-section {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px var(--shadow);
-            margin-bottom: 40px;
-            animation: slideUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .config-section h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 1em;
-        }
-
-        input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid var(--secondary);
-            border-radius: 12px;
-            font-size: 1em;
-            font-family: 'Quicksand', sans-serif;
-            transition: all 0.3s ease;
-            background: var(--bg-light);
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(107, 78, 154, 0.1);
-        }
-
-        .save-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--white);
-            border: none;
-            padding: 15px 40px;
-            border-radius: 12px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Quicksand', sans-serif;
-            box-shadow: 0 6px 20px rgba(107, 78, 154, 0.3);
-        }
-
-        .save-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(107, 78, 154, 0.4);
-        }
-
-        .save-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .admin-section {
-            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            border: 2px solid #FFB74D;
-        }
-
-        .admin-section h3 {
-            color: #E65100;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .reset-btn {
-            background: #FF6F00;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Quicksand', sans-serif;
-        }
-
-        .reset-btn:hover {
-            background: #E65100;
-            transform: translateY(-2px);
-        }
-
         .gifts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -527,28 +415,6 @@
             opacity: 0.5;
         }
 
-        .info-message {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            text-align: center;
-            color: #2E7D32;
-            font-weight: 500;
-            border: 2px solid #81C784;
-        }
-
-        .warning-message {
-            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            text-align: center;
-            color: #E65100;
-            font-weight: 500;
-            border: 2px solid #FFB74D;
-        }
-
         .loading {
             text-align: center;
             padding: 40px;
@@ -584,32 +450,6 @@
             <p class="subtitle">Clique no presente que deseja dar para marcá-lo como escolhido</p>
         </header>
 
-        <div class="config-section">
-            <h2>⚙️ Configurações</h2>
-            
-            <div style="margin-top: 30px;">
-                <h3 style="color: var(--primary); margin-bottom: 15px;">📱 Seu WhatsApp</h3>
-                <p style="color: var(--text-light); margin-bottom: 20px;">Digite seu número para receber as notificações:</p>
-                <div class="form-group">
-                    <label for="whatsappNumber">Número do WhatsApp (com DDD)</label>
-                    <input 
-                        type="tel" 
-                        id="whatsappNumber" 
-                        placeholder="Ex: 61999887766" 
-                        maxlength="11"
-                    />
-                </div>
-                <button class="save-btn" onclick="saveWhatsAppNumber()">💾 Salvar Número</button>
-                <div id="saveMessage"></div>
-            </div>
-
-            <div class="admin-section">
-                <h3>🔧 Área do Administrador</h3>
-                <p style="color: #E65100; margin-bottom: 15px;">Use este botão para resetar todos os presentes e começar de novo:</p>
-                <button class="reset-btn" onclick="resetAllGifts()">🔄 Resetar Todos os Presentes</button>
-            </div>
-        </div>
-
         <div id="loadingMessage" class="loading">
             Carregando presentes... 🎁
         </div>
@@ -641,7 +481,7 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js';
-        import { getDatabase, ref, onValue, set, remove } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js';
+        import { getDatabase, ref, onValue, set } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js';
         import { getAnalytics } from 'https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js';
 
         // ============================================
@@ -658,6 +498,11 @@
             measurementId: "G-CFF93S4LDP"
         };
 
+        // ============================================
+        // SEU WHATSAPP CONFIGURADO AQUI!
+        // ============================================
+        const WHATSAPP_NUMBER = "61920043583";
+
         // Inicializar Firebase
         let app, database, analytics;
         try {
@@ -667,7 +512,7 @@
         } catch (error) {
             console.error("Erro ao inicializar Firebase:", error);
             document.getElementById('loadingMessage').innerHTML = `
-                <div class="warning-message">
+                <div style="background: #ffebee; padding: 20px; border-radius: 15px; color: #c62828;">
                     ⚠️ Erro ao conectar com Firebase!<br>
                     ${error.message}
                 </div>
@@ -700,13 +545,7 @@
         ];
 
         let selectedGift = null;
-        let whatsappNumber = localStorage.getItem('whatsappNumber') || '';
         let chosenGifts = {};
-
-        // Carregar número salvo
-        if (whatsappNumber) {
-            document.getElementById('whatsappNumber').value = whatsappNumber;
-        }
 
         // Monitorar mudanças no Firebase em tempo real
         if (database) {
@@ -749,34 +588,8 @@
             });
         }
 
-        // Salvar número do WhatsApp
-        window.saveWhatsAppNumber = function() {
-            const input = document.getElementById('whatsappNumber');
-            const number = input.value.replace(/\D/g, '');
-            
-            if (number.length < 10 || number.length > 11) {
-                alert('Por favor, digite um número válido com DDD (10 ou 11 dígitos)');
-                return;
-            }
-
-            whatsappNumber = number;
-            localStorage.setItem('whatsappNumber', whatsappNumber);
-            
-            const messageDiv = document.getElementById('saveMessage');
-            messageDiv.innerHTML = '<div class="info-message">✓ Número salvo com sucesso!</div>';
-            setTimeout(() => {
-                messageDiv.innerHTML = '';
-            }, 3000);
-        };
-
         // Abrir modal de confirmação
         window.openModal = function(gift) {
-            if (!whatsappNumber) {
-                alert('⚠️ Por favor, configure seu número do WhatsApp primeiro!');
-                document.getElementById('whatsappNumber').focus();
-                return;
-            }
-
             selectedGift = gift;
             document.getElementById('modalTitle').textContent = gift.name;
             document.getElementById('modalMessage').textContent = `Você escolheu: ${gift.name}. Digite seu nome para confirmar:`;
@@ -821,7 +634,7 @@
                               `✅ Presença confirmada!`;
 
                 // Abrir WhatsApp
-                const whatsappUrl = `https://wa.me/55${whatsappNumber}?text=${message}`;
+                const whatsappUrl = `https://wa.me/55${WHATSAPP_NUMBER}?text=${message}`;
                 window.open(whatsappUrl, '_blank');
 
                 // Animar a remoção do item
@@ -844,29 +657,6 @@
             }
         };
 
-        // Resetar todos os presentes (apenas admin)
-        window.resetAllGifts = async function() {
-            if (!database) {
-                alert('Firebase não configurado!');
-                return;
-            }
-
-            const confirmReset = confirm('⚠️ ATENÇÃO! Isso vai remover TODOS os presentes escolhidos. Tem certeza?');
-            if (!confirmReset) return;
-
-            const confirmAgain = confirm('Tem CERTEZA MESMO? Esta ação não pode ser desfeita!');
-            if (!confirmAgain) return;
-
-            try {
-                const giftsRef = ref(database, 'chosenGifts');
-                await remove(giftsRef);
-                alert('✓ Todos os presentes foram resetados com sucesso!');
-            } catch (error) {
-                console.error("Erro ao resetar:", error);
-                alert('Erro ao resetar presentes!');
-            }
-        };
-
         // Permitir confirmar com Enter
         document.getElementById('guestName').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
@@ -879,12 +669,6 @@
             if (e.target.id === 'confirmModal') {
                 window.closeModal();
             }
-        });
-
-        // Formatar número enquanto digita
-        document.getElementById('whatsappNumber').addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            e.target.value = value;
         });
     </script>
 </body>
