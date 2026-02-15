@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏡 Chá de Casa Nova</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6B4E9A;
+            --secondary: #9B7EBD;
+            --accent: #E8A87C;
+            --bg-light: #F5F3F8;
+            --text-dark: #2C1E3F;
+            --text-light: #6B5B7F;
+            --white: #FFFFFF;
+            --success: #4CAF50;
+            --shadow: rgba(107, 78, 154, 0.15);
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #E8D5F2 0%, #F5F3F8 50%, #E0C9E8 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(155, 126, 189, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--white);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px var(--shadow);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header::before {
+            content: '🌸';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 80px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        header::after {
+            content: '🏡';
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            font-size: 80px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .header-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--text-light);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .config-section {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin-bottom: 40px;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .config-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--secondary);
+            border-radius: 12px;
+            font-size: 1em;
+            font-family: 'Quicksand', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(107, 78, 154, 0.1);
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 6px 20px rgba(107, 78, 154, 0.3);
+        }
+
+        .save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(107, 78, 154, 0.4);
+        }
+
+        .save-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .admin-section {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 2px solid #FFB74D;
+        }
+
+        .admin-section h3 {
+            color: #E65100;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .reset-btn {
+            background: #FF6F00;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .reset-btn:hover {
+            background: #E65100;
+            transform: translateY(-2px);
+        }
+
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gift-item {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-out both;
+        }
+
+        .gift-item:nth-child(1) { animation-delay: 0.1s; }
+        .gift-item:nth-child(2) { animation-delay: 0.15s; }
+        .gift-item:nth-child(3) { animation-delay: 0.2s; }
+        .gift-item:nth-child(4) { animation-delay: 0.25s; }
+        .gift-item:nth-child(5) { animation-delay: 0.3s; }
+        .gift-item:nth-child(6) { animation-delay: 0.35s; }
+        .gift-item:nth-child(7) { animation-delay: 0.4s; }
+        .gift-item:nth-child(8) { animation-delay: 0.45s; }
+        .gift-item:nth-child(9) { animation-delay: 0.5s; }
+        .gift-item:nth-child(10) { animation-delay: 0.55s; }
+        .gift-item:nth-child(n+11) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .gift-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .gift-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(107, 78, 154, 0.25);
+        }
+
+        .gift-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .gift-item.chosen {
+            animation: chosenAnimation 0.6s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes chosenAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .gift-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-item:hover .gift-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .gift-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .gift-description {
+            color: var(--text-light);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .chosen-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--success);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            opacity: 0;
+            animation: badgeAppear 0.4s ease-out 0.2s forwards;
+            z-index: 10;
+        }
+
+        @keyframes badgeAppear {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 30, 63, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInModal 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: modalIconBounce 0.6s ease-out;
+        }
+
+        @keyframes modalIconBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .modal h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: var(--text-light);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--secondary);
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-family: 'Quicksand', sans-serif;
+            margin-bottom: 20px;
+            background: var(--bg-light);
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(107, 78, 154, 0.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .modal-btn-confirm {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(107, 78, 154, 0.3);
+        }
+
+        .modal-btn-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(107, 78, 154, 0.4);
+        }
+
+        .modal-btn-cancel {
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .modal-btn-cancel:hover {
+            background: #E0D8EA;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+            font-size: 1.2em;
+        }
+
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .info-message {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            color: #2E7D32;
+            font-weight: 500;
+            border: 2px solid #81C784;
+        }
+
+        .warning-message {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            color: #E65100;
+            font-weight: 500;
+            border: 2px solid #FFB74D;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .gifts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-icon">🏡</div>
+            <h1>Chá de Casa Nova</h1>
+            <p class="subtitle">Clique no presente que deseja dar para marcá-lo como escolhido</p>
+        </header>
+
+        <div class="config-section">
+            <h2>⚙️ Configurações</h2>
+            <div class="warning-message">
+                <strong>⚠️ IMPORTANTE:</strong> Antes de usar, você precisa configurar o Firebase!<br>
+                Veja as instruções no arquivo README.md
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">📱 Seu WhatsApp</h3>
+                <p style="color: var(--text-light); margin-bottom: 20px;">Digite seu número para receber as notificações:</p>
+                <div class="form-group">
+                    <label for="whatsappNumber">Número do WhatsApp (com DDD)</label>
+                    <input 
+                        type="tel" 
+                        id="whatsappNumber" 
+                        placeholder="Ex: 61999887766" 
+                        maxlength="11"
+                    />
+                </div>
+                <button class="save-btn" onclick="saveWhatsAppNumber()">💾 Salvar Número</button>
+                <div id="saveMessage"></div>
+            </div>
+
+            <div class="admin-section">
+                <h3>🔧 Área do Administrador</h3>
+                <p style="color: #E65100; margin-bottom: 15px;">Use este botão para resetar todos os presentes e começar de novo:</p>
+                <button class="reset-btn" onclick="resetAllGifts()">🔄 Resetar Todos os Presentes</button>
+            </div>
+        </div>
+
+        <div id="loadingMessage" class="loading">
+            Carregando presentes... 🎁
+        </div>
+
+        <div class="gifts-grid" id="giftsGrid" style="display: none;">
+            <!-- Os presentes serão inseridos aqui via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-icon">🎁</div>
+            <h3 id="modalTitle">Confirmar Presente</h3>
+            <p id="modalMessage">Digite seu nome para confirmar a escolha deste presente:</p>
+            <input 
+                type="text" 
+                class="modal-input" 
+                id="guestName" 
+                placeholder="Seu nome completo"
+            />
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmGift()">✓ Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getDatabase, ref, onValue, set, remove } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+
+        // ============================================
+        // CONFIGURE SEU FIREBASE AQUI!
+        // ============================================
+        const firebaseConfig = {
+            apiKey: "SUA_API_KEY_AQUI",
+            authDomain: "seu-projeto.firebaseapp.com",
+            databaseURL: "https://seu-projeto-default-rtdb.firebaseio.com",
+            projectId: "seu-projeto",
+            storageBucket: "seu-projeto.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
+        };
+
+        // Inicializar Firebase
+        let app, database;
+        try {
+            app = initializeApp(firebaseConfig);
+            database = getDatabase(app);
+        } catch (error) {
+            console.error("Erro ao inicializar Firebase:", error);
+            document.getElementById('loadingMessage').innerHTML = `
+                <div class="warning-message">
+                    ⚠️ Firebase não configurado!<br>
+                    Por favor, configure as credenciais do Firebase no código.
+                </div>
+            `;
+        }
+
+        // Lista de presentes
+        const gifts = [
+            { id: 1, icon: '🍳', name: 'Jogo de Panelas', description: 'Panelas antiaderentes de qualidade' },
+            { id: 2, icon: '🔪', name: 'Kit de Facas', description: 'Conjunto de facas profissionais' },
+            { id: 3, icon: '🍽️', name: 'Aparelho de Jantar', description: 'Jogo completo para 6 pessoas' },
+            { id: 4, icon: '☕', name: 'Jogo de Xícaras', description: 'Xícaras de porcelana elegantes' },
+            { id: 5, icon: '🥤', name: 'Jogo de Copos', description: 'Conjunto de copos variados' },
+            { id: 6, icon: '🧺', name: 'Cesto de Roupas', description: 'Organizador prático' },
+            { id: 7, icon: '🛁', name: 'Jogo de Toalhas', description: 'Toalhas de banho macias' },
+            { id: 8, icon: '🛏️', name: 'Jogo de Cama', description: 'Lençóis de alta qualidade' },
+            { id: 9, icon: '🧹', name: 'Aspirador de Pó', description: 'Limpeza prática e eficiente' },
+            { id: 10, icon: '☕', name: 'Cafeteira Elétrica', description: 'Para um café perfeito' },
+            { id: 11, icon: '🌡️', name: 'Ferro de Passar', description: 'Com controle de temperatura' },
+            { id: 12, icon: '🍞', name: 'Torradeira', description: 'Para torradas crocantes' },
+            { id: 13, icon: '🥘', name: 'Forma de Bolo', description: 'Para bolos deliciosos' },
+            { id: 14, icon: '🍴', name: 'Talheres', description: 'Conjunto completo de talheres' },
+            { id: 15, icon: '🧴', name: 'Organizador de Pia', description: 'Para detergentes e esponjas' },
+            { id: 16, icon: '🖼️', name: 'Quadro Decorativo', description: 'Para embelezar a sala' },
+            { id: 17, icon: '🕯️', name: 'Velas Aromáticas', description: 'Para perfumar o ambiente' },
+            { id: 18, icon: '🪴', name: 'Vasos de Plantas', description: 'Para decoração verde' },
+            { id: 19, icon: '🧊', name: 'Forma de Gelo', description: 'Gelo em formatos divertidos' },
+            { id: 20, icon: '🥄', name: 'Kit de Utensílios', description: 'Colheres, espátulas e mais' }
+        ];
+
+        let selectedGift = null;
+        let whatsappNumber = localStorage.getItem('whatsappNumber') || '';
+        let chosenGifts = {};
+
+        // Carregar número salvo
+        if (whatsappNumber) {
+            document.getElementById('whatsappNumber').value = whatsappNumber;
+        }
+
+        // Monitorar mudanças no Firebase em tempo real
+        if (database) {
+            const giftsRef = ref(database, 'chosenGifts');
+            onValue(giftsRef, (snapshot) => {
+                chosenGifts = snapshot.val() || {};
+                renderGifts();
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('giftsGrid').style.display = 'grid';
+            });
+        }
+
+        // Renderizar presentes
+        function renderGifts() {
+            const giftsGrid = document.getElementById('giftsGrid');
+            giftsGrid.innerHTML = '';
+
+            const availableGifts = gifts.filter(gift => !chosenGifts[gift.id]);
+
+            if (availableGifts.length === 0) {
+                giftsGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎉</div>
+                        <p>Todos os presentes já foram escolhidos!<br>Obrigado a todos!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            availableGifts.forEach(gift => {
+                const giftElement = document.createElement('div');
+                giftElement.className = 'gift-item';
+                giftElement.innerHTML = `
+                    <span class="gift-icon">${gift.icon}</span>
+                    <div class="gift-name">${gift.name}</div>
+                    <div class="gift-description">${gift.description}</div>
+                `;
+                giftElement.onclick = () => window.openModal(gift);
+                giftsGrid.appendChild(giftElement);
+            });
+        }
+
+        // Salvar número do WhatsApp
+        window.saveWhatsAppNumber = function() {
+            const input = document.getElementById('whatsappNumber');
+            const number = input.value.replace(/\D/g, '');
+            
+            if (number.length < 10 || number.length > 11) {
+                alert('Por favor, digite um número válido com DDD (10 ou 11 dígitos)');
+                return;
+            }
+
+            whatsappNumber = number;
+            localStorage.setItem('whatsappNumber', whatsappNumber);
+            
+            const messageDiv = document.getElementById('saveMessage');
+            messageDiv.innerHTML = '<div class="info-message">✓ Número salvo com sucesso!</div>';
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 3000);
+        };
+
+        // Abrir modal de confirmação
+        window.openModal = function(gift) {
+            if (!whatsappNumber) {
+                alert('⚠️ Por favor, configure seu número do WhatsApp primeiro!');
+                document.getElementById('whatsappNumber').focus();
+                return;
+            }
+
+            selectedGift = gift;
+            document.getElementById('modalTitle').textContent = gift.name;
+            document.getElementById('modalMessage').textContent = `Você escolheu: ${gift.name}. Digite seu nome para confirmar:`;
+            document.getElementById('guestName').value = '';
+            document.getElementById('confirmModal').classList.add('active');
+            document.getElementById('guestName').focus();
+        };
+
+        // Fechar modal
+        window.closeModal = function() {
+            document.getElementById('confirmModal').classList.remove('active');
+            selectedGift = null;
+        };
+
+        // Confirmar presente
+        window.confirmGift = async function() {
+            const guestName = document.getElementById('guestName').value.trim();
+            
+            if (!guestName) {
+                alert('Por favor, digite seu nome!');
+                return;
+            }
+
+            if (!selectedGift || !database) return;
+
+            try {
+                // Salvar no Firebase
+                const giftRef = ref(database, `chosenGifts/${selectedGift.id}`);
+                await set(giftRef, {
+                    guestName: guestName,
+                    giftName: selectedGift.name,
+                    giftIcon: selectedGift.icon,
+                    giftDescription: selectedGift.description,
+                    timestamp: Date.now()
+                });
+
+                // Criar mensagem para WhatsApp
+                const message = `🎁 *Novo Presente Escolhido!*%0A%0A` +
+                              `👤 *Convidado:* ${guestName}%0A` +
+                              `🎁 *Presente:* ${selectedGift.icon} ${selectedGift.name}%0A` +
+                              `📝 *Descrição:* ${selectedGift.description}%0A%0A` +
+                              `✅ Presença confirmada!`;
+
+                // Abrir WhatsApp
+                const whatsappUrl = `https://wa.me/55${whatsappNumber}?text=${message}`;
+                window.open(whatsappUrl, '_blank');
+
+                // Animar a remoção do item
+                const giftElements = document.querySelectorAll('.gift-item');
+                giftElements.forEach(el => {
+                    if (el.querySelector('.gift-name').textContent === selectedGift.name) {
+                        el.classList.add('chosen');
+                        el.innerHTML += '<div class="chosen-badge">✓ Escolhido!</div>';
+                    }
+                });
+
+                // Fechar modal
+                setTimeout(() => {
+                    window.closeModal();
+                }, 800);
+
+            } catch (error) {
+                console.error("Erro ao salvar presente:", error);
+                alert('Erro ao salvar presente. Tente novamente!');
+            }
+        };
+
+        // Resetar todos os presentes (apenas admin)
+        window.resetAllGifts = async function() {
+            if (!database) {
+                alert('Firebase não configurado!');
+                return;
+            }
+
+            const confirmReset = confirm('⚠️ ATENÇÃO! Isso vai remover TODOS os presentes escolhidos. Tem certeza?');
+            if (!confirmReset) return;
+
+            const confirmAgain = confirm('Tem CERTEZA MESMO? Esta ação não pode ser desfeita!');
+            if (!confirmAgain) return;
+
+            try {
+                const giftsRef = ref(database, 'chosenGifts');
+                await remove(giftsRef);
+                alert('✓ Todos os presentes foram resetados com sucesso!');
+            } catch (error) {
+                console.error("Erro ao resetar:", error);
+                alert('Erro ao resetar presentes!');
+            }
+        };
+
+        // Permitir confirmar com Enter
+        document.getElementById('guestName').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                window.confirmGift();
+            }
+        });
+
+        // Fechar modal ao clicar fora
+        document.getElementById('confirmModal').addEventListener('click', (e) => {
+            if (e.target.id === 'confirmModal') {
+                window.closeModal();
+            }
+        });
+
+        // Formatar número enquanto digita
+        document.getElementById('whatsappNumber').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
